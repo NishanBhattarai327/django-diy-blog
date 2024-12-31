@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Posting</title>
-</head>
-<body>
-    <h1>Diy - Blog Posting Site</h1>
-</body>
-</html>
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Welcome to the Django bloging website</h1>
+<img src="{% static "images/diy_django_mini_blog_models.png" %}" alt="DIY django mini blog models uml.">
+{% endblock %}

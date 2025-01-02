@@ -8,4 +8,23 @@
 <br>
 <p>Author: {{ blog.blogger }}</p>
 
+<hr>
+<h3>Comment</h3>
+<ul>
+    {% for comment in blog.comment_set.all %}
+    <li>
+        <div>{{ comment.commentor }}  
+            <br>Date: {{ comment.post_date }}
+        </div>
+        <p>{{ comment.description }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+<p>Make a comment</p>
+{% else %}
+<p>login to comment</p>
+{% endif %}
+
 {% endblock %}

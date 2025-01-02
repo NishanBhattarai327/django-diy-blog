@@ -32,11 +32,14 @@ class Blogger(models.Model):
         return reverse("blogger-detail", kwargs={"pk": self.pk})
 
 class Comment(models.Model):
-    blogger = models.ForeignKey(User, on_delete=models.RESTRICT)
+    commentor = models.ForeignKey(User, on_delete=models.RESTRICT)
     post_date = models.DateTimeField(default=timezone.now)
     description = models.TextField()
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)
 
+    class Meta:
+        ordering = ['post_date']
+
     def __str__(self):
-        return f'{self.blogger.username} -  {self.description[:75]}'
+        return f'{self.commentor.username} -  {self.description[:75]}'
 

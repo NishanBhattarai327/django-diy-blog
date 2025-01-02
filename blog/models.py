@@ -10,7 +10,7 @@ class Blog(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     post_date = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey('Author', on_delete=models.RESTRICT, null=True)
+    blogger = models.ForeignKey('Blogger', on_delete=models.RESTRICT, null=True)
 
     def __str__(self):
         return self.name
@@ -18,7 +18,7 @@ class Blog(models.Model):
     def get_absolute_url(self):
         return reverse("blog-detail", kwargs={"pk": self.pk})
 
-class Author(models.Model):
+class Blogger(models.Model):
     name = models.OneToOneField(User, on_delete=models.RESTRICT)
     bio = models.TextField()
 
@@ -26,14 +26,14 @@ class Author(models.Model):
         return self.name.username
     
     def get_absolute_url(self):
-        return reverse("model-detail", kwargs={"pk": self.pk})
+        return reverse("blogger-detail", kwargs={"pk": self.pk})
 
 class Comment(models.Model):
-    author = models.ForeignKey(User, on_delete=models.RESTRICT)
+    blogger = models.ForeignKey(User, on_delete=models.RESTRICT)
     post_date = models.DateTimeField(default=timezone.now)
     description = models.TextField()
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f'{self.author.username} -  {self.description[:75]}'
+        return f'{self.blogger.username} -  {self.description[:75]}'
 

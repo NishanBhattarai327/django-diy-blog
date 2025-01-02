@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>All Blog: </h2>
+    <ul>
+        {% for blog in blog_list %}
+            <li><a href="{{ blog.get_absolute_url }}">{{ blog.name }}</a> - 
+                ({{ blog.post_date }}) - 
+                <a href="{{ blog.blogger.get_absolute_url }}">{{ blog.blogger }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

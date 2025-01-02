@@ -12,6 +12,9 @@ class Blog(models.Model):
     post_date = models.DateTimeField(default=timezone.now)
     blogger = models.ForeignKey('Blogger', on_delete=models.RESTRICT, null=True)
 
+    class Meta:
+        ordering = ['post_date']
+
     def __str__(self):
         return self.name
 

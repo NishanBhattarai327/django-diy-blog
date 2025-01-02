@@ -5,4 +5,10 @@
 <h1>{{ blogger.name }}</h1>
 <p>{{ blogger.bio }}</p>
 
+<ul>
+    {% for blog in blogger.blog_set.all %}
+    <li><a href="{{ blog.get_absolute_url }}">{{blog.name}}</a> - {{blog.post_date}}</li>
+    {% endfor %}
+</ul>
+
 {% endblock %}

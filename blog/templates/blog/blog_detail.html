@@ -4,27 +4,39 @@
 
 <h1>{{ blog.name }}</h1>
 <p>Create on: {{ blog.post_date }}</p>
+<p>Author: <a href="{{ blog.blogger.get_absolute_url }}">{{ blog.blogger }}</a></p>
 <p>{{ blog.description }}</p>
 <br>
-<p>Author: {{ blog.blogger }}</p>
 
-<hr>
-<h3>Comment</h3>
-<ul>
-    {% for comment in blog.comment_set.all %}
-    <li>
-        <div>{{ comment.commentor }}  
-            <br>Date: {{ comment.post_date }}
-        </div>
-        <p>{{ comment.description }}</p>
-    </li>
-    {% endfor %}
-</ul>
-
-{% if user.is_authenticated %}
-<p>Make a comment</p>
-{% else %}
-<p>login to comment</p>
-{% endif %}
+<div class='p-4'>
+    
+    <h3>Comments</h3>
+    <hr>
+    <ul class="sidebar-nav">
+        {% for comment in blog.comment_set.all %}
+        <li>
+            <div>{{ comment.commentor }} ({{ comment.post_date }})
+                - {{ comment.description }}
+            </div>
+            <hr>
+        </li>
+        {% endfor %}
+    </ul>
+    
+    {% if user.is_authenticated %}
+    <p>Make a comment</p>
+    <div class='comment-form'>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    {% else %}
+    <p>login to comment</p>
+    {% endif %}
+</div>
 
 {% endblock %}

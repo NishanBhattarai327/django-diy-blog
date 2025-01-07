@@ -24,6 +24,22 @@
                 <li><a href="{% url 'all-blog' %}">All blogs</a></li>
                 <li><a href="{% url 'all-blogger' %}">All bloggers</a></li>
               </ul>
+              <hr>
+              <ul class='sidebar-nav'>
+                
+                {% if user.is_authenticated %}
+                <li>user: {{user.username}}</li>
+                <li>
+                  <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link">Log Out</button>
+                  </form>
+                </li>
+                
+                {% else %}
+                <li><a href="{% url 'login' %}">login</a></li>
+                {% endif %}
+              </ul>
             {% endblock %}
           </div>
           <div class="col-sm-10">

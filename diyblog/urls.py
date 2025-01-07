@@ -23,5 +23,8 @@ urlpatterns = [
     path('', RedirectView.as_view(url='blog/', permanent=True)),
     path('blog/', include('blog.urls')),
 
+    # The order is important here because Django looks for URL patterns from top-to-bottom.
+    path("accounts/", include("accounts.urls")),
+    
     path('accounts/', include('django.contrib.auth.urls')),
 ]

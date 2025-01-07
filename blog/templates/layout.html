@@ -29,6 +29,7 @@
                 
                 {% if user.is_authenticated %}
                 <li>user: {{user.username}}</li>
+                <li><p><a href="{% url 'password_change' %}">Password Change</a></p></li>
                 <li>
                   <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
@@ -38,6 +39,8 @@
                 
                 {% else %}
                 <li><a href="{% url 'login' %}">login</a></li>
+                <li><p><a href="{% url 'password_reset' %}">Lost password?</a></p></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
                 {% endif %}
               </ul>
             {% endblock %}
